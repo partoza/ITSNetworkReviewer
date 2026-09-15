@@ -4,10 +4,42 @@ import tailwindcss from '@tailwindcss/vite';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import crypto from 'crypto';
 
 const ALLOWED_SUBJECTS = new Set(['network-security', 'cybersecurity']);
 const SUBJECT_QUESTION_COUNTS = { 'network-security': 40, cybersecurity: 255 };
 const PLAYER_NAME_PATTERN = /^[\p{L}\p{N}][\p{L}\p{N} ._'’-]*$/u;
+const DEFAULT_PASSCODE_HASH = '6ccf5eb0b98684778c3b1a5415fdeecd6819dd2ef1cfb22eee2c775cc41dc9cf';
+const AUTH_COOKIE = 'its_reviewer_session';
+const SESSION_DURATION_MS = 8 * 60 * 60 * 1000;
+const ATTEMPT_WINDOW_MS = 15 * 60 * 1000;
+const MAX_ATTEMPTS = 5;
+
+const sessions = new Map();
+const failedAttempts = new Map();
+
+const parseCookies = (header = '') => Object.fromEntries(
+  header.split(';').map((part) => part.trim().split('=').map(decodeURIComponent)).filter(([key]) => key),
+);
+
+const isAuthorized = (req) => {
+  const token = parseCookies(req.headers.cookie)[AUTH_COOKIE];
+  const expiresAt = token ? sessions.get(token) : null;
+  if (!expiresAt || expiresAt <= Date.now()) {
+    if (token) sessions.delete(token);
+    return false;
+  }
+  return true;
+};
+
+const passcodeMatches = (passcode) => {
+  const configuredPasscode = process.env.ITS_REVIEWER_PASSCODE;
+  const expectedHash = configuredPasscode
+    ? crypto.createHash('sha256').update(configuredPasscode).digest()
+    : Buffer.from(DEFAULT_PASSCODE_HASH, 'hex');
+  const suppliedHash = crypto.createHash('sha256').update(passcode).digest();
+  return crypto.timingSafeEqual(suppliedHash, expectedHash);
+};
 
 const sendJson = (res, statusCode, data) => {
   res.statusCode = statusCode;
@@ -21,6 +53,59 @@ const leaderboardPlugin = () => ({
   configureServer(server) {
     server.middlewares.use((req, res, next) => {
       const requestUrl = new URL(req.url, 'http://localhost');
+
+      if (requestUrl.pathname === '/api/auth/status' && req.method === 'GET') {
+        sendJson(res, 200, { authenticated: isAuthorized(req) });
+        return;
+      }
+
+      if (requestUrl.pathname === '/api/auth' && req.method === 'POST') {
+        const clientId = req.socket.remoteAddress || 'unknown';
+        const attempt = failedAttempts.get(clientId);
+        if (attempt && attempt.resetAt > Date.now() && attempt.count >= MAX_ATTEMPTS) {
+          const retryAfter = Math.ceil((attempt.resetAt - Date.now()) / 1000);
+          res.setHeader('Retry-After', String(retryAfter));
+          sendJson(res, 429, { error: 'Too many attempts. Please wait before trying again.', retryAfter });
+          return;
+        }
+
+        let body = '';
+        req.on('data', (chunk) => {
+          if (body.length <= 1000) body += chunk.toString();
+        });
+        req.on('end', () => {
+          try {
+            const passcode = JSON.parse(body)?.passcode;
+            if (typeof passcode !== 'string' || passcode.length > 64 || !passcodeMatches(passcode)) {
+              const current = attempt && attempt.resetAt > Date.now()
+                ? attempt
+                : { count: 0, resetAt: Date.now() + ATTEMPT_WINDOW_MS };
+              current.count += 1;
+              failedAttempts.set(clientId, current);
+              sendJson(res, 401, { error: 'Invalid access code.' });
+              return;
+            }
+
+            failedAttempts.delete(clientId);
+            const token = crypto.randomBytes(32).toString('base64url');
+            sessions.set(token, Date.now() + SESSION_DURATION_MS);
+            const isSecure = req.socket.encrypted || req.headers['x-forwarded-proto'] === 'https';
+            res.setHeader('Set-Cookie', `${AUTH_COOKIE}=${encodeURIComponent(token)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${SESSION_DURATION_MS / 1000}${isSecure ? '; Secure' : ''}`);
+            sendJson(res, 200, { authenticated: true });
+          } catch {
+            sendJson(res, 400, { error: 'Invalid authentication request.' });
+          }
+        });
+        return;
+      }
+
+      if (
+        (requestUrl.pathname === '/api/network-info' || requestUrl.pathname === '/api/leaderboard')
+        && !isAuthorized(req)
+      ) {
+        sendJson(res, 401, { error: 'Authentication required.' });
+        return;
+      }
 
       if (requestUrl.pathname === '/api/network-info' && req.method === 'GET') {
         const host = req.headers.host || 'localhost:5173';
