@@ -240,11 +240,106 @@ p {
 
 /* Results Review */
 .review-item {
-  background: var(--surface-color);
+  background: #fcfcfc;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.review-header,
+.review-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.review-header {
+  margin-bottom: 1rem;
+}
+
+.review-toolbar {
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  background: #fafafa;
+  border: 1px solid #eeeeee;
+  padding: 0.75rem;
+}
+
+.review-question {
+  color: #262626;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+
+.review-answer-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.review-answer-row {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 8px;
+  padding: 0.75rem 0.875rem;
+}
+
+.review-answer-row.correct-answer {
+  background: #fbfefc;
+  border-color: #e5f3eb;
+}
+
+.review-answer-label {
+  color: #8a8a8a;
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.review-answer {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.review-answer + .review-answer {
+  margin-top: 0.25rem;
+}
+
+.answer-correct {
+  color: #14804a;
+}
+
+.answer-incorrect {
+  color: #d33b3b;
+}
+
+.review-match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.review-match-item {
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 9px;
+  padding: 0.875rem;
+}
+
+.review-match-prompt {
+  color: #555555;
+  font-size: 0.825rem;
+  line-height: 1.5;
+  margin-bottom: 0.625rem;
 }
 
 .review-item.correct {
@@ -729,8 +824,18 @@ p {
     flex-direction: column !important;
   }
   
-  .review-grid {
-    grid-template-columns: 1fr !important;
+  .review-header,
+  .review-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .review-header .btn {
+    align-self: flex-start;
+  }
+
+  .review-item {
+    padding: 1rem;
   }
   
   .option-btn {

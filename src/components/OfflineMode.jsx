@@ -10,6 +10,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 
 const OFFLINE_VERSION_KEY = 'its-reviewer:offline-version';
 const OFFLINE_DATA_KEY = 'its-reviewer:offline-content';
+const PLAYER_NAME_KEY = 'its-reviewer:player-name';
 const APP_STORAGE_PREFIX = 'its-reviewer:';
 const APP_CACHE_PREFIX = 'its-reviewer-';
 
@@ -30,7 +31,7 @@ const collectAppResources = () => {
   ])];
 };
 
-const OfflineMode = () => {
+const OfflineMode = ({ userName }) => {
   const [savedVersion, setSavedVersion] = useState(() => localStorage.getItem(OFFLINE_VERSION_KEY));
   const [status, setStatus] = useState('idle');
   const [message, setMessage] = useState('');
@@ -69,9 +70,11 @@ const OfflineMode = () => {
       localStorage.setItem(OFFLINE_DATA_KEY, JSON.stringify({
         version: currentVersion,
         savedAt: new Date().toISOString(),
+        playerName: userName,
         subjects,
       }));
       localStorage.setItem(OFFLINE_VERSION_KEY, currentVersion);
+      localStorage.setItem(PLAYER_NAME_KEY, userName);
       setSavedVersion(currentVersion);
       setStatus('saved');
       const questionCount = subjects.reduce((total, subject) => total + subject.questions.length, 0);

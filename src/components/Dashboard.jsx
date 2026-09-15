@@ -156,7 +156,7 @@ const Dashboard = ({ onSelectSubject, userName }) => (
 
         <div className="grid gap-4 lg:grid-cols-2">
           <InvitePlayer userName={userName} />
-          <OfflineMode />
+          <OfflineMode userName={userName} />
         </div>
       </CardContent>
     </Card>

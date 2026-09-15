@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Leaderboard from './Leaderboard';
 import { Button } from './ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+
+const isQuestionCorrect = (question, userAnswer) => {
+  if (question.type === 'match' || question.type === 'multi-part') {
+    return Object.keys(question.correctAnswer).every(
+      (definition) => userAnswer && userAnswer[definition] === question.correctAnswer[definition],
+    );
+  }
+  if (question.type === 'multiple-select') {
+    return Array.isArray(userAnswer)
+      && userAnswer.length === question.correctAnswer.length
+      && userAnswer.every((value) => question.correctAnswer.includes(value));
+  }
+  return userAnswer === question.correctAnswer;
+};
 
 const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart, userName, subject }) => {
   const [showReview, setShowReview] = useState(false);
   const [scoreStatus, setScoreStatus] = useState('saving');
   const [scoreMessage, setScoreMessage] = useState('');
+  const [reviewFilter, setReviewFilter] = useState('all');
 
   useEffect(() => {
     const controller = new AbortController();
@@ -36,6 +52,15 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
   }, [userName, score, subject, total]);
 
   const percentage = Math.round((score / total) * 100);
+  const reviewItems = questions.map((question, index) => ({
+    question,
+    index,
+    userAnswer: userAnswers[question.id],
+    isCorrect: isQuestionCorrect(question, userAnswers[question.id]),
+  }));
+  const filteredReviewItems = reviewItems.filter(({ isCorrect }) => (
+    reviewFilter === 'all' || (reviewFilter === 'correct' ? isCorrect : !isCorrect)
+  ));
 
   return (
     <div className="glass-card" style={{ maxWidth: '800px', width: '100%' }}>
@@ -88,8 +113,8 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
         </div>
       ) : (
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-            <h2>Detailed Review</h2>
+          <div className="review-header">
+            <h2 className="mb-0">Detailed Review</h2>
             <Button
               variant="ghost"
               size="sm"
@@ -99,69 +124,70 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
             </Button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {questions.map((q, idx) => {
-              const userAnswer = userAnswers[q.id];
-              
-              let isCorrect = false;
-              if (q.type === 'match' || q.type === 'multi-part') {
-                isCorrect = Object.keys(q.correctAnswer).every(
-                  def => userAnswer && userAnswer[def] === q.correctAnswer[def]
-                );
-              } else if (q.type === 'multiple-select') {
-                isCorrect = Array.isArray(userAnswer) && 
-                            userAnswer.length === q.correctAnswer.length &&
-                            userAnswer.every(val => q.correctAnswer.includes(val));
-              } else {
-                isCorrect = userAnswer === q.correctAnswer;
-              }
+          <div className="review-toolbar">
+            <p className="text-sm text-neutral-500">
+              Showing {filteredReviewItems.length} of {questions.length} questions
+            </p>
+            <Select value={reviewFilter} onValueChange={setReviewFilter}>
+              <SelectTrigger className="w-full sm:w-44" aria-label="Filter review results">
+                <SelectValue placeholder="Filter results" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All questions ({questions.length})</SelectItem>
+                <SelectItem value="correct">Correct ({score})</SelectItem>
+                <SelectItem value="incorrect">Incorrect ({total - score})</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {filteredReviewItems.map(({ question: q, index: idx, userAnswer, isCorrect }) => {
               return (
-                <div key={idx} className={`review-item ${isCorrect ? 'correct' : 'incorrect'}`}>
+                <div key={q.id} className={`review-item ${isCorrect ? 'correct' : 'incorrect'}`}>
                   <div className={`badge ${isCorrect ? 'correct' : 'incorrect'}`}>
                     {isCorrect ? 'Correct' : 'Incorrect'}
                   </div>
-                  <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem' }}>{idx + 1}. {q.question}</h3>
+                  <h3 className="review-question">{idx + 1}. {q.question}</h3>
                   
                   {q.type === 'multiple-select' ? (
-                    <div className="review-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', background: 'var(--bg-color)', padding: '1rem', borderRadius: '0.5rem', border: '1px solid var(--border-color)' }}>
-                      <div>
-                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', display: 'block', marginBottom: '0.5rem' }}>Your Answers:</span>
+                    <div className="review-answer-panel">
+                      <div className="review-answer-row user-answer">
+                        <span className="review-answer-label">Your answers</span>
                         {(userAnswer || []).length > 0 ? (
                           (userAnswer || []).map((ans, aIdx) => (
-                            <strong key={aIdx} style={{ display: 'block', marginBottom: '0.5rem', color: q.correctAnswer.includes(ans) ? 'var(--success-color)' : 'var(--error-color)' }}>{ans}</strong>
+                            <span key={aIdx} className={`review-answer ${q.correctAnswer.includes(ans) ? 'answer-correct' : 'answer-incorrect'}`}>{ans}</span>
                           ))
                         ) : (
-                          <strong style={{ color: 'var(--error-color)' }}>No Answer</strong>
+                          <span className="review-answer answer-incorrect">No answer</span>
                         )}
                       </div>
                       {!isCorrect && (
-                        <div>
-                          <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', display: 'block', marginBottom: '0.5rem' }}>Correct Answers:</span>
+                        <div className="review-answer-row correct-answer">
+                          <span className="review-answer-label">Correct answers</span>
                           {q.correctAnswer.map((ans, aIdx) => (
-                            <strong key={aIdx} style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--success-color)' }}>{ans}</strong>
+                            <span key={aIdx} className="review-answer answer-correct">{ans}</span>
                           ))}
                         </div>
                       )}
                     </div>
                   ) : q.type === 'match' || q.type === 'multi-part' ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div className="review-match-list">
                       {(q.definitions || q.parts.map(p => p.label)).map((def, dIdx) => {
                         const uAns = userAnswer?.[def];
                         const cAns = q.correctAnswer[def];
                         const matchCorrect = uAns === cAns;
                         return (
-                          <div key={dIdx} style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '0.5rem' }}>
-                            <p style={{ color: 'var(--text-secondary)', marginBottom: '0.5rem', fontSize: '0.9rem' }}>{def}</p>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                              <div>
-                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', display: 'block' }}>Your Match:</span>
-                                <strong style={{ color: matchCorrect ? 'var(--success-color)' : 'var(--error-color)' }}>{uAns || 'No Answer'}</strong>
+                          <div key={dIdx} className="review-match-item">
+                            <p className="review-match-prompt">{def}</p>
+                            <div className="review-answer-panel">
+                              <div className="review-answer-row user-answer">
+                                <span className="review-answer-label">Your match</span>
+                                <span className={`review-answer ${matchCorrect ? 'answer-correct' : 'answer-incorrect'}`}>{uAns || 'No answer'}</span>
                               </div>
                               {!matchCorrect && (
-                                <div>
-                                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', display: 'block' }}>Correct Match:</span>
-                                  <strong style={{ color: 'var(--success-color)' }}>{cAns}</strong>
+                                <div className="review-answer-row correct-answer">
+                                  <span className="review-answer-label">Correct match</span>
+                                  <span className="review-answer answer-correct">{cAns}</span>
                                 </div>
                               )}
                             </div>
@@ -170,15 +196,15 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
                       })}
                     </div>
                   ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '0.5rem' }}>
-                      <div>
-                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', display: 'block', marginBottom: '0.25rem' }}>Your Answer:</span>
-                        <strong style={{ color: isCorrect ? 'var(--success-color)' : 'var(--error-color)' }}>{userAnswer || 'No Answer'}</strong>
+                    <div className="review-answer-panel">
+                      <div className="review-answer-row user-answer">
+                        <span className="review-answer-label">Your answer</span>
+                        <span className={`review-answer ${isCorrect ? 'answer-correct' : 'answer-incorrect'}`}>{userAnswer || 'No answer'}</span>
                       </div>
                       {!isCorrect && (
-                        <div>
-                          <span style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', display: 'block', marginBottom: '0.25rem' }}>Correct Answer:</span>
-                          <strong style={{ color: 'var(--success-color)' }}>{q.correctAnswer}</strong>
+                        <div className="review-answer-row correct-answer">
+                          <span className="review-answer-label">Correct answer</span>
+                          <span className="review-answer answer-correct">{q.correctAnswer}</span>
                         </div>
                       )}
                     </div>
