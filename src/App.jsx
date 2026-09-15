@@ -1,35 +1,43 @@
 import React, { useState } from 'react';
-import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Quiz from './components/Quiz';
 import Results from './components/Results';
 import NameModal from './components/NameModal';
 import Leaderboard from './components/Leaderboard';
-import { questions } from './data/questions';
+import SubjectWelcome from './components/SubjectWelcome';
+import { getSubject } from './data/subjects';
 import { shuffleArray } from './utils';
 
+const PLAYER_NAME_KEY = 'its-reviewer:player-name';
+
+const readSavedPlayerName = () => {
+  try {
+    return localStorage.getItem(PLAYER_NAME_KEY) || '';
+  } catch {
+    return '';
+  }
+};
+
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [currentView, setCurrentView] = useState('login'); // login, home, quiz, results, leaderboard
+  const [userName, setUserName] = useState(readSavedPlayerName);
+  const [currentView, setCurrentView] = useState('home'); // home, subject, quiz, results, leaderboard
+  const [selectedSubjectId, setSelectedSubjectId] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
-  const handleLogin = (password) => {
-    if (password === '445909') {
-      setIsAuthenticated(true);
-      setCurrentView('home');
-    } else {
-      return false;
-    }
-    return true;
+  const selectedSubject = getSubject(selectedSubjectId);
+
+  const handleSelectSubject = (subjectId) => {
+    setSelectedSubjectId(subjectId);
+    setCurrentView('subject');
   };
 
   const handleStartQuiz = () => {
+    if (!selectedSubject) return;
     setUserAnswers({});
     setScore(0);
-    setShuffledQuestions(shuffleArray(questions));
+    setShuffledQuestions(shuffleArray(selectedSubject.questions));
     setCurrentView('quiz');
   };
 
@@ -73,40 +81,45 @@ function App() {
 
   const handleNameSubmit = (name) => {
     setUserName(name);
+    try {
+      localStorage.setItem(PLAYER_NAME_KEY, name);
+    } catch {
+      // The quiz can still run when browser storage is unavailable.
+    }
   };
 
   return (
     <div className="app-container">
-      {!isAuthenticated && (
-        <Login onLogin={handleLogin} />
-      )}
-
-      {isAuthenticated && !userName && (
+      {!userName && (
         <NameModal onSubmit={handleNameSubmit} />
       )}
 
-      {isAuthenticated && userName && currentView === 'home' && (
+      {userName && currentView === 'home' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
-          <Dashboard onStartQuiz={handleStartQuiz} userName={userName} />
-          <div style={{ textAlign: 'center' }}>
-            <button className="btn" style={{ width: 'auto', background: 'rgba(0,0,0,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }} onClick={() => setCurrentView('leaderboard')}>
-              View Leaderboard
-            </button>
-          </div>
+          <Dashboard onSelectSubject={handleSelectSubject} userName={userName} />
         </div>
       )}
 
-      {isAuthenticated && userName && currentView === 'leaderboard' && (
+      {userName && selectedSubject && currentView === 'subject' && (
+        <SubjectWelcome
+          subject={selectedSubject}
+          onStart={handleStartQuiz}
+          onLeaderboard={() => setCurrentView('leaderboard')}
+          onBack={() => setCurrentView('home')}
+        />
+      )}
+
+      {userName && selectedSubject && currentView === 'leaderboard' && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Leaderboard currentUserName={userName} onBack={() => setCurrentView('home')} />
+          <Leaderboard subject={selectedSubject} currentUserName={userName} onBack={() => setCurrentView('subject')} />
         </div>
       )}
 
-      {isAuthenticated && userName && currentView === 'quiz' && (
-        <Quiz questions={shuffledQuestions} onFinish={handleFinishQuiz} />
+      {userName && currentView === 'quiz' && (
+        <Quiz questions={shuffledQuestions} onFinish={handleFinishQuiz} subject={selectedSubject} />
       )}
 
-      {isAuthenticated && userName && currentView === 'results' && (
+      {userName && currentView === 'results' && (
         <Results 
           score={score} 
           total={shuffledQuestions.length} 
@@ -115,6 +128,7 @@ function App() {
           onReturnHome={handleReturnHome}
           onRestart={handleStartQuiz}
           userName={userName}
+          subject={selectedSubject}
         />
       )}
     </div>

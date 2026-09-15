@@ -1,14 +1,22 @@
 {
   "scores": [
     {
+      "name": "rex",
+      "score": 1,
+      "date": "2026-09-15T20:32:03.625Z",
+      "subject": "cybersecurity"
+    },
+    {
       "name": "Doc",
       "score": 36,
-      "date": "2026-07-14T20:00:37.097Z"
+      "date": "2026-07-14T20:00:37.097Z",
+      "subject": "network-security"
     },
     {
       "name": "AmieTibo",
       "score": 10,
-      "date": "2026-07-14T19:42:44.854Z"
+      "date": "2026-07-14T19:42:44.854Z",
+      "subject": "network-security"
     }
   ]
 }

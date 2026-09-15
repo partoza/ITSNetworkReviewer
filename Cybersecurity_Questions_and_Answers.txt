@@ -1,0 +1,895 @@
+==================================================
+CYBERSECURITY PRE-QUALIFYING (IT23L 8496)
+==================================================
+
+Question 1: Continuous monitoring mainly helps to:
+  [ ] A Reduce storage
+  [ ] B Increase hardware speed
+  [ ] C Remove encryption
+  [ ] D Detect threats early
+  CORRECT ANSWER: D Detect threats early
+
+Question 2: Which malware type spreads across networks automatically?
+  [ ] A Worm
+  [ ] B Trojan
+  [ ] C Keylogger
+  [ ] D Spyware
+  CORRECT ANSWER: A Worm
+
+Question 3: Why are backups tested regularly?
+  [ ] A To increase speed
+  [ ] B To ensure recovery works
+  [ ] C To consume storage
+  [ ] D To encrypt files
+  CORRECT ANSWER: B To ensure recovery works
+
+Question 4: Which control BEST protects data if a laptop is stolen?
+  [ ] A Screen saver
+  [ ] B Disk encryption
+  [ ] C Firewall rule
+  [ ] D Fast processor
+  CORRECT ANSWER: B Disk encryption
+
+Question 5: A DMZ is used to:
+  [ ] A Store backups
+  [ ] B Host internal payroll
+  [ ] C Disable routing
+  [ ] D Isolate public services
+  CORRECT ANSWER: D Isolate public services
+
+Question 6: Which control prevents unauthorized devices from connecting to a switch port?
+  [ ] A DNS
+  [ ] B DHCP
+  [ ] C Port security
+  [ ] D NAT
+  CORRECT ANSWER: C Port security
+
+Question 7: What is the main purpose of data classification?
+  [ ] A Organize data by sensitivity
+  [ ] B Increase bandwidth
+  [ ] C Encrypt all files
+  [ ] D Delete old data
+  CORRECT ANSWER: A Organize data by sensitivity
+
+Question 8: An attacker intercepts communication between two users without their knowledge. This is:
+  [ ] A DoS
+  [ ] B Man-in-the-middle
+  [ ] C Privilege escalation
+  [ ] D Phishing
+  CORRECT ANSWER: B Man-in-the-middle
+
+Question 9: NAT improves security by:
+  [ ] A Hiding internal IP addresses
+  [ ] B Blocking all traffic
+  [ ] C Replacing firewalls
+  [ ] D Encrypting packets
+  CORRECT ANSWER: A Hiding internal IP addresses
+
+Question 10: Why should unused services be disabled?
+  [ ] A Enable encryption
+  [ ] B Reduce attack surface
+  [ ] C Improve graphics
+  [ ] D Increase RAM
+  CORRECT ANSWER: B Reduce attack surface
+
+Question 11: Attackers send targeted emails to executives containing malicious links. This attack is called:
+  [ ] A Spam
+  [ ] B DoS
+  [ ] C Spear phishing
+  [ ] D Port scanning
+  CORRECT ANSWER: C Spear phishing
+
+Question 12: Which control helps prove who performed an action?
+  [ ] A Compression
+  [ ] B Audit trails
+  [ ] C Encryption
+  [ ] D Caching
+  CORRECT ANSWER: B Audit trails
+
+Question 13: Which attack abuses TCP handshake resources?
+  [ ] A DNS spoofing
+  [ ] B ARP poisoning
+  [ ] C SYN flood
+  [ ] D Phishing
+  CORRECT ANSWER: C SYN flood
+
+Question 14: Multiple compromised devices flooding a server is known as:
+  [ ] A DDoS attack
+  [ ] B ARP spoofing
+  [ ] C DNS poisoning
+  [ ] D Port forwarding
+  CORRECT ANSWER: A DDoS attack
+
+Question 15: Encrypted traffic inspection is difficult because:
+  [ ] A Cables are slow
+  [ ] B Routers fail
+  [ ] C DNS stops working
+  [ ] D Packets are hidden without decryption
+  CORRECT ANSWER: D Packets are hidden without decryption
+
+Question 16: What is the FIRST step when suspicious activity is detected?
+  [ ] A Ignore alert
+  [ ] B Shut down everything
+  [ ] C Identify and verify the incident
+  [ ] D Delete data
+  CORRECT ANSWER: C Identify and verify the incident
+
+Question 17: Which security principle ensures users can access data when needed?
+  [ ] A Availability
+  [ ] B Integrity
+  [ ] C Confidentiality
+  [ ] D Authentication
+  CORRECT ANSWER: A Availability
+
+Question 18: Which protocol securely transfers files over SSH?
+  [ ] A TFTP
+  [ ] B HTTP
+  [ ] C FTP
+  [ ] D SFTP
+  CORRECT ANSWER: D SFTP
+
+Question 19: Why is security awareness training repeated regularly?
+  [ ] A Users forget threats over time
+  [ ] B To slow productivity
+  [ ] C To replace firewalls
+  [ ] D To increase storage
+  CORRECT ANSWER: A Users forget threats over time
+
+Question 20: A system encrypts data but uses weak keys. The MAIN issue is:
+  [ ] A Poor key management
+  [ ] B Availability
+  [ ] C Network speed
+  [ ] D File size
+  CORRECT ANSWER: A Poor key management
+
+Question 21: An internal host scanning many ports internally likely indicates:
+  [ ] A User login
+  [ ] B Lateral reconnaissance
+  [ ] C Normal backup
+  [ ] D DNS update
+  CORRECT ANSWER: B Lateral reconnaissance
+
+Question 22: Which protocol is insecure because it sends data in plain text?
+  [ ] A Telnet
+  [ ] B SSH
+  [ ] C SFTP
+  [ ] D HTTPS
+  CORRECT ANSWER: A Telnet
+
+Question 23: Why is network segmentation important for security?
+  [ ] A Increases signal strength
+  [ ] B Contains attacks within segments
+  [ ] C Removes routers
+  [ ] D Disables VLANs
+  CORRECT ANSWER: B Contains attacks within segments
+
+Question 24: A rogue access point mainly threatens security by:
+  [ ] A Bypassing network controls
+  [ ] B Improving coverage
+  [ ] C Reducing latency
+  [ ] D Blocking traffic
+  CORRECT ANSWER: A Bypassing network controls
+
+Question 25: Why is DNS security important?
+  [ ] A It prevents traffic redirection attacks
+  [ ] B It affects CPU speed
+  [ ] C It encrypts data
+  [ ] D It blocks malware automatically
+  CORRECT ANSWER: A It prevents traffic redirection attacks
+
+Question 26: A system detects unusual login time patterns automatically. This is an example of:
+  [ ] A Signature detection
+  [ ] B Behavior-based detection
+  [ ] C Manual review
+  [ ] D Physical control
+  CORRECT ANSWER: B Behavior-based detection
+
+Question 27: Which security approach uses multiple overlapping controls?
+  [ ] A Single firewall
+  [ ] B Defense in depth
+  [ ] C Flat network
+  [ ] D Open access
+  CORRECT ANSWER: B Defense in depth
+
+Question 28: Which attack tricks devices into sending traffic through the attacker?
+  [ ] A Phishing
+  [ ] B DoS
+  [ ] C ARP spoofing
+  [ ] D Port scan
+  CORRECT ANSWER: C ARP spoofing
+
+Question 29: Incident response plans exist mainly to:
+  [ ] A Reduce impact and recovery time
+  [ ] B Increase attacks
+  [ ] C Avoid documentation
+  [ ] D Replace backups
+  CORRECT ANSWER: A Reduce impact and recovery time
+
+Question 30: Which attack relies MOST on human psychology?
+  [ ] A Buffer overflow
+  [ ] B Social engineering
+  [ ] C SQL injection
+  [ ] D SYN flood
+  CORRECT ANSWER: B Social engineering
+
+Question 31: Which tool is commonly used for packet capture analysis?
+  [ ] A Calculator
+  [ ] B Paint
+  [ ] C Word
+  [ ] D Wireshark
+  CORRECT ANSWER: D Wireshark
+
+Question 32: Which practice MOST reduces phishing success?
+  [ ] A Longer cables
+  [ ] B Disabling logs
+  [ ] C Open WiFi
+  [ ] D User verification training
+  CORRECT ANSWER: D User verification training
+
+Question 33: An attacker gains access by exploiting unpatched software. This failure is mainly due to:
+  [ ] A Strong passwords
+  [ ] B Network congestion
+  [ ] C Poor patch management
+  [ ] D Weak WiFi
+  CORRECT ANSWER: C Poor patch management
+
+Question 34: Which action MOST reduces password cracking success?
+  [ ] A Account sharing
+  [ ] B Short passwords
+  [ ] C Plain text storage
+  [ ] D Strong salted hashing
+  CORRECT ANSWER: D Strong salted hashing
+
+Question 35: Malware that records keystrokes is known as:
+  [ ] A Adware
+  [ ] B Worm
+  [ ] C Rootkit
+  [ ] D Keylogger
+  CORRECT ANSWER: D Keylogger
+
+Question 36: A firewall blocks traffic based on IP and ports. This is called:
+  [ ] A Application filtering
+  [ ] B Packet filtering
+  [ ] C Behavior analysis
+  [ ] D Content scanning
+  CORRECT ANSWER: B Packet filtering
+
+Question 37: Which is a detective control?
+  [ ] A Access policy
+  [ ] B MFA
+  [ ] C Log monitoring
+  [ ] D Firewall rule
+  CORRECT ANSWER: C Log monitoring
+
+Question 38: Why monitor baseline network traffic?
+  [ ] A Increase speed
+  [ ] B Disable logs
+  [ ] C Detect anomalies
+  [ ] D Replace firewall
+  CORRECT ANSWER: C Detect anomalies
+
+Question 39: Open WiFi networks are risky because they:
+  [ ] A Increase encryption
+  [ ] B Disable DNS
+  [ ] C Allow easier interception
+  [ ] D Reduce bandwidth
+  CORRECT ANSWER: C Allow easier interception
+
+Question 40: What does an IPS do that IDS does not?
+  [ ] A Monitor logs
+  [ ] B Log traffic
+  [ ] C Automatically block threats
+  [ ] D Analyze packets
+  CORRECT ANSWER: C Automatically block threats
+
+Question 41: What is the BEST reason to implement least privilege?
+  [ ] A Improve graphics
+  [ ] B Increase access speed
+  [ ] C Limit damage from compromised accounts
+  [ ] D Reduce encryption
+  CORRECT ANSWER: C Limit damage from compromised accounts
+
+Question 42: What is the BEST protection for IoT devices in enterprise networks?
+  [ ] A Shared VLAN
+  [ ] B Isolated VLAN with restrictions
+  [ ] C Open internet access
+  [ ] D Disabled monitoring
+  CORRECT ANSWER: B Isolated VLAN with restrictions
+
+Question 43: Which measure MOST limits damage after compromise?
+  [ ] A Segmentation and access controls
+  [ ] B Open ports
+  [ ] C Shared admin accounts
+  [ ] D Single subnet
+  CORRECT ANSWER: A Segmentation and access controls
+
+Question 44: What is the primary risk of flat network architecture?
+  [ ] A Faster traffic
+  [ ] B Stronger encryption
+  [ ] C Better segmentation
+  [ ] D Easy lateral movement for attackers
+  CORRECT ANSWER: D Easy lateral movement for attackers
+
+Question 45: Packet sniffing is MOST effective when traffic is:
+  [ ] A Unencrypted
+  [ ] B Compressed
+  [ ] C Encrypted
+  [ ] D Segmented
+  CORRECT ANSWER: A Unencrypted
+
+Question 46: ACLs are used to:
+  [ ] A Assign IP addresses
+  [ ] B Encrypt packets
+  [ ] C Increase bandwidth
+  [ ] D Control traffic permissions
+  CORRECT ANSWER: D Control traffic permissions
+
+Question 47: If an attacker modifies logs after compromise, what control would BEST prevent this?
+  [ ] A Shared accounts
+  [ ] B Local storage only
+  [ ] C Weak permissions
+  [ ] D Centralized immutable logging
+  CORRECT ANSWER: D Centralized immutable logging
+
+Question 48: Which threat actor typically has legitimate internal access?
+  [ ] A Script kiddie
+  [ ] B External hacker
+  [ ] C Insider threat
+  [ ] D Botnet
+  CORRECT ANSWER: C Insider threat
+
+Question 49: Which device primarily forwards packets between networks?
+  [ ] A Hub
+  [ ] B Switch
+  [ ] C Repeater
+  [ ] D Router
+  CORRECT ANSWER: D Router
+
+Question 50: A user account suddenly accesses files outside its normal role. This is an example of:
+  [ ] A System update
+  [ ] B Privilege misuse
+  [ ] C Normal behavior
+  [ ] D Network segmentation
+  CORRECT ANSWER: B Privilege misuse
+
+==================================================
+REVIEW 10 (IT23L 6755)
+==================================================
+
+Question 1: Which command displays both configured DNS server information and the IP address resolution for a URL?
+  [ ] A Ping
+  [ ] B Nslookup
+  [ ] C Traceroute
+  [ ] D Nmap
+  CORRECT ANSWER: B Nslookup
+
+Question 2: You are working with the senior admin team to identify potential risks. Which phase of risk management are you in?
+  [ ] A Risk Monitoring
+  [ ] B Risk Identification
+  [ ] C Risk Assessment
+  [ ] D Risk Mitigation
+  CORRECT ANSWER: B Risk Identification
+
+Question 3: What protects the health care information of individuals?
+  [ ] A PCI DSS
+  [ ] B FERPA
+  [ ] C HIPAA
+  [ ] D GDPR
+  CORRECT ANSWER: C HIPAA
+
+Question 4: What protects information about individuals that is stored by federal agencies?
+  [ ] A PCI DSS
+  [ ] B Privacy Act of 1974
+  [ ] C HIPAA
+  [ ] D FERPA
+  CORRECT ANSWER: B Privacy Act of 1974
+
+Question 5: Which security mechanism ensures that data cannot be modified or altered during transmission?
+  [ ] A Access control
+  [ ] B Two-factor authentication
+  [ ] C Hashing
+  [ ] D Encryption
+  CORRECT ANSWER: C Hashing
+
+Question 6: What protects the credit card information of individuals?
+  [ ] A GDPR
+  [ ] B PCI DSS
+  [ ] C FERPA
+  [ ] D HIPAA
+  CORRECT ANSWER: B PCI DSS
+
+Question 7: Conducting a risk evaluation at your company, you identify risks related to the web server... You recommend purchasing insurance and hiring another organization... Which risk mitigation strategy is this an example of?
+  [ ] A Risk Reduction
+  [ ] B Risk Avoidance
+  [ ] C Risk Acceptance
+  [ ] D Risk Transfer
+  CORRECT ANSWER: D Risk Transfer
+
+Question 8: What protects the educational records of individuals?
+  [ ] A GDPR
+  [ ] B FERPA
+  [ ] C PCI DSS
+  [ ] D HIPAA
+  CORRECT ANSWER: B FERPA
+
+Question 9: What protects the personal information of members of the European Union?
+  [ ] A PCI DSS
+  [ ] B FERPA
+  [ ] C GDPR
+  [ ] D HIPAA
+  CORRECT ANSWER: C GDPR
+
+Question 10: Which three authentication factors is valid for use in a multi-factor authentication scenario? (Choose three)
+  [ ] A Something you are
+  [ ] B Something you have
+  [ ] C Something you earn
+  [ ] D Something you see
+  [ ] E Something you know
+  [ ] F Something you do
+  CORRECT ANSWER: A Something you are, B Something you have, E Something you know
+
+==================================================
+REVIEW 9 (IT23L 6755)
+==================================================
+
+Question 1: You need to allow employees to access your company's secure network from their homes. Which type of security should you implement?
+  [ ] A RIP
+  [ ] B MP
+  [ ] C IDS
+  [ ] D VPN
+  CORRECT ANSWER: D VPN
+
+Question 2: You need to transfer configuration files to a router across an unsecured network. Which protocol should you use to encrypt the files in transit?
+  [ ] A tftp
+  [ ] B http
+  [ ] C ssh
+  [ ] D telnet
+  CORRECT ANSWER: C ssh
+
+Question 3: Match the correct answer (Worm Response Phases):
+  [ ] 1 What cleans and patches infected systems? -> Treatment
+  [ ] 2 Removing or blocking infected systems from the network? -> Quarantine
+  [ ] 3 Patch unexpected systems to deprive the worm of more available targets. -> Inoculation
+  [ ] 4 Compartmentalize and segment the network to limit the spread of the worm to areas already infected? -> Containment
+  CORRECT ANSWER: 1: Treatment, 2: Quarantine, 3: Inoculation, 4: Containment
+
+Question 4: Match the correct answer (CIA Triad):
+  [ ] 1 Data should never be altered or compromised. -> Integrity
+  [ ] 2 What data should be accessed and read by authorized users only? -> Confidentiality
+  [ ] 3 Ensuring that data is accessible to users when needed. -> Availability
+  CORRECT ANSWER: 1: Integrity, 2: Confidentiality, 3: Availability
+
+Question 5: Match the correct answer (Regulations):
+  [ ] 1 What protects the personal information of members of the European Union? -> General Data Protection Regulation (GDPR)
+  [ ] 2 What protects the health care information of individuals? -> Health Insurance Portability and Accountability Act (HIPAA)
+  [ ] 3 What protects the credit card information of individuals? -> Payment Card Industry Data Security Standard (PCI DSS)
+  [ ] 4 What protects the educational records of individuals? -> Family Educational Rights and Privacy Act (FERPA)
+  [ ] 5 Protects information about individuals that are stored by federal agencies. -> Federal Information Security Management Act (FISMA)
+  CORRECT ANSWER: 1: GDPR, 2: HIPAA, 3: PCI DSS, 4: FERPA, 5: FISMA
+
+Question 6: Which two private IPv4 addresses would be blocked on the internet to prevent security and performance issues? (Choose two)
+  [ ] A 10.10.10.1
+  [ ] B 192.168.189.1
+  [ ] C 172.18.100.78
+  [ ] D 127.0.0.1
+  CORRECT ANSWER: A 10.10.10.1, D 127.0.0.1 (or Private IP range A & D)
+
+Question 7: Your home network seems to have slowed down considerably... unknown host attached... what should you do?
+  [ ] A Change the network SSID
+  [ ] B Implement MAC address filtering
+  [ ] C Create an IP access control list
+  [ ] D Block the host IP address
+  CORRECT ANSWER: B Implement MAC address filtering
+
+Question 8: Employees receive email with hyperlink to register for webinar hosted by unknown party... What type of threat?
+  [ ] A Smishing
+  [ ] B Vishing
+  [ ] C Ransomware
+  [ ] D Spear Phishing
+  CORRECT ANSWER: D Spear Phishing
+
+==================================================
+REVIEW 8 (IT23L 6755)
+==================================================
+
+Question 1: Backup strategy restoration (Full Sun 6pm, Incremental Mon-Sat 6pm, deleted Fri 8am, current Sat 10pm). Restore order:
+  [ ] 1: Sunday (Full)
+  [ ] 2: Monday (Incremental)
+  [ ] 3: Tuesday (Incremental)
+  [ ] 4: Wednesday (Incremental)
+  [ ] 5: Thursday (Incremental)
+  CORRECT ANSWER: Sunday -> Monday -> Tuesday -> Wednesday -> Thursday
+
+Question 2: What security assessment of IT systems where PII data is available, accurate, confidential, and accessible only by authorized personnel?
+  [ ] A Risk Framing
+  [ ] B Workflow Management
+  [ ] C Information Assurance
+  [ ] D Cyber Kill Chain
+  CORRECT ANSWER: C Information Assurance
+
+Question 3: Integrity is the ability to protect data so that unauthorized parties cannot view it.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: B False (Confidentiality protects viewing; Integrity protects alteration)
+
+Question 4: Implement multifactor authentication for physical access (currently using fingerprint scan). Add:
+  [ ] A Voiceprint Analysis
+  [ ] B ID Card
+  [ ] C Facial Recognition
+  [ ] D Retinal Scan
+  CORRECT ANSWER: B ID Card (Something you have + Something you are)
+
+Question 5: Recover is one of the core functions of the NIST Cybersecurity Framework.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: A True
+
+Question 6: Confidentiality means that data or information on your system is maintained so that it is not modified or detected by unauthorized parties.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: B False
+
+Question 7: Console output output analysis (Mac SSH/Login logs)... Which event occurred?
+  [ ] A User established encrypted connection via terminal application
+  [ ] B User failed connection
+  [ ] C SYN flood attack
+  [ ] D Brute force attack
+  CORRECT ANSWER: A A user has established an encrypted connection via a terminal application
+
+Question 8: Capture incoming IP packets to a file for investigation (Choose 2):
+  [ ] A Wireshark
+  [ ] B TCPDump
+  [ ] C Netstat
+  [ ] D NMap
+  CORRECT ANSWER: A Wireshark, B TCPDump
+
+Question 9: Destruction/Destroy is one of the functions of the NIST Cybersecurity Framework.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: B False
+
+Question 10: Which encryption type is used to secure WPA2/WPA3 WiFi networks?
+  [ ] A Advance Encryption Standard (AES)
+  [ ] B Triple DES
+  [ ] C RSA
+  [ ] D Data Encryption Standard
+  CORRECT ANSWER: A Advance Encryption Standard (AES)
+
+Question 11: Respond is one of the functions of the NIST Security Framework.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: A True
+
+Question 12: Two disadvantages of public vulnerability databases (Choose 2):
+  [ ] A Costly to document
+  [ ] B Incompatible
+  [ ] C Threat actors can access to vary threats
+  [ ] D Time to investigate and approve
+  CORRECT ANSWER: C Threat actors access, D Takes long time to investigate/approve
+
+Question 13: Match regulations (GDPR, HIPAA, PCI-DSS, FERPA, FISMA):
+  [ ] 1 EU -> GDPR
+  [ ] 2 Health -> HIPAA
+  [ ] 3 Credit card -> PCI-DSS
+  [ ] 4 Educational -> FERPA
+  [ ] 5 Federal -> FISMA
+  CORRECT ANSWER: 1: GDPR, 2: HIPAA, 3: PCI-DSS, 4: FERPA, 5: FISMA
+
+Question 14: Which command displays both configured DNS server info and IP resolution?
+  [ ] A NMap
+  [ ] B ping
+  [ ] C traceroute
+  [ ] D nslookup
+  CORRECT ANSWER: D nslookup
+
+Question 15: Availability guarantees that systems, applications and data are accessible to users when needed.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: A True
+
+Question 16: Public IP address accessing company's private internal network. Action:
+  [ ] A Update security software
+  [ ] B Renew DHCP
+  [ ] C Block external IP addresses from private network segment
+  [ ] D Update IP range
+  CORRECT ANSWER: C Block external IP addresses from the private network segment
+
+Question 17: Match tools (netstat, NMap, nslookup):
+  [ ] 1 Detects network connections -> netstat
+  [ ] 2 Scans networks for open ports -> NMap
+  [ ] 3 Performs DNS queries -> nslookup
+  CORRECT ANSWER: 1: netstat, 2: NMap, 3: nslookup
+
+Question 18: USB Flash drive found on floor connected to computer...
+  [ ] A Phishing
+  [ ] B Baiting
+  [ ] C Vishing
+  [ ] D Whaling
+  CORRECT ANSWER: B Baiting
+
+Question 19: Diamond Model: What does Capability node represent?
+  [ ] A Malware tools and techniques
+  [ ] B People/organization initiating intrusion
+  [ ] C Network assets
+  [ ] D IP addresses/domains
+  CORRECT ANSWER: A Malware tools and techniques used by the intruder during the attack
+
+==================================================
+REVIEW 7 (IT23L 6755)
+==================================================
+
+Question 1: Yes or No statements for gathering information tools:
+  [ ] 1 Zenmap is GUI app that runs nmap -> YES
+  [ ] 2 ss is Linux equivalent of netstat -> YES
+  [ ] 3 netstat runs in a GUI environment -> NO
+  [ ] 4 netstat shows active/waiting ports -> YES
+  CORRECT ANSWER: 1: YES, 2: YES, 3: NO, 4: YES
+
+Question 2: Match Syslog levels:
+  [ ] 1 Condition corrected immediately -> Level 1 (Alert)
+  [ ] 2 Error may occur if not remedied -> Level 4 (Warning)
+  [ ] 3 Unusual event but not error -> Level 5 (Notice)
+  [ ] 4 Normal operation -> Level 6 (Informational)
+  CORRECT ANSWER: 1: Level 1 (Alert), 2: Level 4 (Warning), 3: Level 5 (Notice), 4: Level 6 (Informational)
+
+Question 3: Match threats to mitigation strategies:
+  [ ] 1 Hardened facilities -> Natural Disasters
+  [ ] 2 Firewalls, IDS/IPS -> Cyberattack
+  [ ] 3 Alternate sources -> Supply-Chain Disruptions
+  [ ] 4 Standard procedures, training -> Employee Errors
+  CORRECT ANSWER: 1: Natural Disasters, 2: Cyberattack, 3: Supply-Chain Disruptions, 4: Employee Errors
+
+Question 4: Match attack types:
+  [ ] 1 Random mass email -> Phishing
+  [ ] 2 Carefully targeted email -> Spear Phishing
+  [ ] 3 Fraudulent text messages -> Smishing
+  [ ] 4 Voice calls -> Vishing
+  CORRECT ANSWER: 1: Phishing, 2: Spear Phishing, 3: Smishing, 4: Vishing
+
+Question 5: Yes/No if located in DMZ:
+  [ ] 1 Directory -> NO
+  [ ] 2 Email -> YES
+  [ ] 3 Web -> YES
+  [ ] 4 Print -> NO
+  CORRECT ANSWER: 1: NO, 2: YES, 3: YES, 4: NO
+
+Question 6: Match network attacks:
+  [ ] 1 Fake DHCP server -> Rogue DHCP Attack
+  [ ] 2 Flood DHCP server -> DHCP Starvation Attack
+  [ ] 3 Open DNS amplification -> DNS Amplification Attack
+  [ ] 4 Change A record -> DNS Spoofing Attack
+  CORRECT ANSWER: 1: Rogue DHCP, 2: DHCP Starvation, 3: DNS Amplification, 4: DNS Spoofing
+
+==================================================
+REVIEW 6 (IT23L 6755)
+==================================================
+
+Question 1: Which wireless encryption technology requires AES to secure home wireless networks?
+  [ ] A TKIP
+  [ ] B WEP
+  [ ] C WPA3
+  [ ] D WPA2
+  CORRECT ANSWER: D WPA2
+
+Question 2: A security analyst may share sensitive data with unauthorized users.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: B False
+
+Question 3: Laptop cannot print to wireless printer after OS update. What solves issue?
+  [ ] A Reinstall service pack
+  [ ] B Check patches
+  [ ] C Install new device driver for wireless printer
+  [ ] D Update firmware
+  CORRECT ANSWER: C Install a new device driver for the wireless printer
+
+Question 4: Crashes & popups... 2 immediate actions (Choose 2):
+  [ ] A Reinstall windows
+  [ ] B Scan & remove malware
+  [ ] C Deploy policy to install/upgrade antivirus
+  [ ] D Configure firewall
+  CORRECT ANSWER: B Scan & remove malware, C Deploy policy to install/upgrade antivirus
+
+Question 5: Active reconnaissance example during pen test:
+  [ ] A Gathering social media info
+  [ ] B Perform NMAP port scan on LAN
+  [ ] C Search WHOIS
+  [ ] D View HTML source code
+  CORRECT ANSWER: B Perform an NMAP port scan on the LAN
+
+Question 6: Purpose of command 'ls -l' (implied terminal file command):
+  [ ] A Navigate folder
+  [ ] B Display text content
+  [ ] C Display file permissions and ownership
+  [ ] D Open text editor
+  CORRECT ANSWER: C To display the file permissions and ownership of the executable file.
+
+Question 7: What should you create to prevent spoofing of the internal network?
+  [ ] A DNS Record
+  [ ] B Net Rule
+  [ ] C Host File Record
+  [ ] D an ACL (access control list)
+  CORRECT ANSWER: D an ACL (access control list)
+
+Question 8: Verify HIPAA technical safeguards compliance (Choose 2):
+  [ ] A Automatic log off
+  [ ] B IT Auditing
+  [ ] C Penetration Testing
+  [ ] D Security awareness training
+  CORRECT ANSWER: B IT Auditing, C Penetration Testing
+
+Question 9: Hacker gained root access as guest using privilege escalation program:
+  [ ] A DDoS
+  [ ] B Buffer Overflow
+  [ ] C Privilege escalation
+  [ ] D Brute Force
+  CORRECT ANSWER: C Privilege escalation.
+
+Question 10: Match control measures:
+  [ ] 1 Discover unwanted events -> Detective Measures
+  [ ] 2 Avert occurrence -> Preventive Measures
+  [ ] 3 Restore system -> Corrective Measures
+  CORRECT ANSWER: 1: Detective Measures, 2: Preventive Measures, 3: Corrective Measures
+
+Question 11: Device to filter websites available to employees:
+  [ ] A IDS
+  [ ] B HONEY POT
+  [ ] C IPS
+  [ ] D PROXY SERVER
+  CORRECT ANSWER: D PROXY SERVER
+
+Question 12: Match Incident Response phases:
+  [ ] 1 Mitigate impact -> Containment, Eradication, And Recovery
+  [ ] 2 Report cause/cost -> Post-incident activity and preparation
+  [ ] 3 Evaluate indicators -> Detection and Analysis
+  [ ] 4 Establish capability -> Preparation
+  CORRECT ANSWER: 1: Containment/Eradication/Recovery, 2: Post-incident, 3: Detection & Analysis, 4: Preparation
+
+Question 13: SIEM alert for unusual URL. What to do?
+  [ ] A Block URL
+  [ ] B Submit URL to threat intelligence portal for analysis
+  [ ] C Visit URL
+  [ ] D Ask users
+  CORRECT ANSWER: B Submit the URL to the threat intelligence portal for analysis
+
+Question 14: Two basic metrics when assigning vulnerability severity (Choose 2):
+  [ ] A Impact on organization
+  [ ] B Age of hardware
+  [ ] C Time involved
+  [ ] D Likelihood adversary exploits it
+  CORRECT ANSWER: A Impact on organization, D Likelihood of exploitation
+
+Question 15: What does hashing provide for data communication?
+  [ ] A Data Non Repudiation
+  [ ] B Origin Authentication
+  [ ] C Data Encryption
+  [ ] D Data Integrity
+  CORRECT ANSWER: D Data Integrity
+
+Question 16: A security analyst may use a disgruntled employee's network credentials to monitor behavior.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: B False
+
+Question 17: Prolonged and in-depth presence on competitor network by hired criminals:
+  [ ] A Ransomware
+  [ ] B DDoS
+  [ ] C APT (Advanced Persistent Threat)
+  [ ] D Man in the Middle
+  CORRECT ANSWER: C APT (Advanced Persistent Threat)
+
+Question 18: Exploit attempting to gain user credentials:
+  [ ] A Remote port scan
+  [ ] B Directory listing
+  [ ] C Sending email with link to fictitious web login page
+  [ ] D Installing backdoor
+  CORRECT ANSWER: C Sending an email with a link to a fictitious web portal login page
+
+Question 19: Telnet used for DB server. 2 immediate actions (Choose 2):
+  [ ] A Force strong passwords
+  [ ] B Reconfigure HTTP
+  [ ] C Implement SSH access
+  [ ] D Disable telnet access
+  CORRECT ANSWER: C Implement SSH access, D Disable telnet access
+
+Question 20: netstat listening state indicates:
+  [ ] A Ports open and waiting for connections
+  [ ] B Remote disconnected
+  [ ] C State unknown
+  [ ] D Actively connected
+  CORRECT ANSWER: A Ports are open on the system and are waiting for connections
+
+Question 21: Two natural disasters for DR plan (Choose 2):
+  [ ] A Volcanic Eruptions
+  [ ] B Nuclear Contamination
+  [ ] C Floods
+  [ ] D Hazardous Spills
+  CORRECT ANSWER: A Volcanic Eruptions, C Floods
+
+Question 22: Match Vulnerability tools/concepts:
+  [ ] 1 Nessus Scanner -> Discovering
+  [ ] 2 CVSS -> Prioritizing
+  [ ] 3 Patch Management -> Remediating
+  CORRECT ANSWER: 1: Discovering, 2: Prioritizing, 3: Remediating
+
+Question 23: Match Windows log types:
+  [ ] 1 Events from programs -> Application Logs
+  [ ] 2 Installation/updates -> Setup Logs
+  [ ] 3 Hardware/driver events -> System Logs
+  [ ] 4 Audit policy success/failure -> Security Logs
+  CORRECT ANSWER: 1: Application Logs, 2: Setup Logs, 3: System Logs, 4: Security Logs
+
+Question 24: Match Risk concepts:
+  [ ] 1 People, Property, Data -> Asset
+  [ ] 2 Action causing negative impact -> Threat
+  [ ] 3 Potential for loss -> Risk
+  [ ] 4 Weakness -> Vulnerability
+  CORRECT ANSWER: 1: Asset, 2: Threat, 3: Risk, 4: Vulnerability
+
+Question 25: Two disadvantages of public vulnerability databases (Choose 2):
+  [ ] A Threat actors access to vary threats
+  [ ] B Long time to investigate
+  [ ] C Costly
+  [ ] D Incompatible
+  CORRECT ANSWER: A Threat actors access, B Takes long time
+
+Question 26: Misspelled intranet URL fails, IP works. Action:
+  [ ] A Update web server software
+  [ ] B Take web portal offline
+  [ ] C Restore database backup
+  [ ] D Verify accuracy of entry in local DNS server
+  CORRECT ANSWER: D Verify the accuracy of the entry for the site in the local DNS server
+
+Question 27: Keep track of OS versions and patches on end-user devices:
+  [ ] A Security Policies
+  [ ] B Business Continuity
+  [ ] C Asset Management
+  [ ] D Incident Management
+  CORRECT ANSWER: C Asset Management
+
+Question 28: Website crashes repeatedly every 30 mins after restart:
+  [ ] A Ransomware
+  [ ] B Spear Phishing
+  [ ] C Social Engineering
+  [ ] D Denial of Service (DoS)
+  CORRECT ANSWER: D Denial of Service (DoS)
+
+Question 29: Security analysts may have access to employee data on company server, if authorized.
+  [ ] A True
+  [ ] B False
+  CORRECT ANSWER: A True
+
+Question 30: SIEM alert verified as valid incident. Next step:
+  [ ] A Log alert
+  [ ] B Update doc
+  [ ] C Prepare notes
+  [ ] D Escalate The Situation Immediately.
+  CORRECT ANSWER: D Escalate The Situation Immediately.
+
+Question 31: Syslog server receives warning severity from DNS server:
+  [ ] A Hardware error
+  [ ] B Condition exists that will cause errors in the future if not fixed
+  [ ] C Server unusable
+  [ ] D Address immediately
+  CORRECT ANSWER: B Condition exists that will cause errors in the future if the issue is not fixed
+
+Question 32: Purpose of a hypervisor:
+  [ ] A Firewall services
+  [ ] B Creates and runs virtual machines
+  [ ] C Log traffic
+  [ ] D Internet gateway
+  CORRECT ANSWER: B It creates and runs virtual machines
+
+Question 33: Where to view Windows scan/security results?
+  [ ] A Application Logs
+  [ ] B Windows Security
+  [ ] C Task Manager
+  [ ] D System logs
+  CORRECT ANSWER: B Windows Security
+
+Question 34: Password + 5-digit code on smartphone:
+  [ ] A VPN
+  [ ] B Multifactor Authentication
+  [ ] C Triple
+  [ ] D Radius
+  CORRECT ANSWER: B Multifactor Authentication

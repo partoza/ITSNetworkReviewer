@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import question3Image from '../assets/question.jpg';
 import { shuffleArray } from '../utils';
+import { Button } from './ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const imageMap = {
   '3': question3Image
 };
 
-const Quiz = ({ questions, onFinish }) => {
+const Quiz = ({ questions, onFinish, subject }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentAnswer, setCurrentAnswer] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
@@ -39,11 +41,15 @@ const Quiz = ({ questions, onFinish }) => {
     const newAnswers = { ...userAnswers, [currentQuestion.id]: currentAnswer };
     setUserAnswers(newAnswers);
 
-    if (isLastQuestion) {
-      onFinish(newAnswers);
-    } else {
+    if (!isLastQuestion) {
       setCurrentIndex(currentIndex + 1);
     }
+  };
+
+  const handleMarkAsDone = () => {
+    const finalAnswers = { ...userAnswers, [currentQuestion.id]: currentAnswer };
+    setUserAnswers(finalAnswers);
+    onFinish(finalAnswers);
   };
 
   const handleMatchSelect = (def, term) => {
@@ -69,19 +75,8 @@ const Quiz = ({ questions, onFinish }) => {
 
   const progressPercentage = ((currentIndex) / questions.length) * 100;
 
-  let isAnswerComplete = false;
-  if (currentQuestion.type === 'match') {
-    if (currentAnswer && Object.keys(currentAnswer).length === currentQuestion.definitions.length) {
-      isAnswerComplete = Object.values(currentAnswer).every(val => val !== '');
-    }
-  } else if (currentQuestion.type === 'multi-part') {
-    if (currentAnswer && Object.keys(currentAnswer).length === currentQuestion.parts.length) {
-      isAnswerComplete = Object.values(currentAnswer).every(val => val !== '');
-    }
-  } else if (currentQuestion.type === 'multiple-select') {
-    isAnswerComplete = Array.isArray(currentAnswer) && currentAnswer.length === currentQuestion.requiredCount;
-  } else {
-    isAnswerComplete = !!currentAnswer;
+  if (!currentQuestion) {
+    return <div className="glass-card w-full max-w-3xl text-center"><h2>Questions unavailable</h2><p>This subject does not have a valid question set yet.</p></div>;
   }
 
   return (
@@ -92,7 +87,7 @@ const Quiz = ({ questions, onFinish }) => {
       
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', color: 'var(--text-secondary)' }}>
         <span>Question {currentIndex + 1} of {questions.length}</span>
-        <span>Network Security</span>
+        <span>{subject?.name}</span>
       </div>
 
       <h2 className="question-text" style={{ marginBottom: '1.5rem', lineHeight: '1.4', whiteSpace: 'pre-wrap' }}>{currentQuestion.question}</h2>
@@ -125,26 +120,17 @@ const Quiz = ({ questions, onFinish }) => {
           {currentQuestion.definitions.map((def, dIdx) => (
             <div key={dIdx} style={{ background: 'transparent', padding: '1.5rem', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
               <p style={{ marginBottom: '1rem', color: '#1f2937', fontWeight: '400' }}>{def}</p>
-              <select
-                className="input-field"
+              <Select
                 value={currentAnswer?.[def] || ''}
-                onChange={(e) => handleMatchSelect(def, e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '8px',
-                  background: '#ffffff',
-                  color: '#1f2937',
-                  border: 'none',
-                  fontSize: '1rem',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-                  cursor: 'pointer'
-                }}
-              ><option value="" disabled>Select the matching policy...</option>
+                onValueChange={(value) => handleMatchSelect(def, value)}
+              >
+                <SelectTrigger><SelectValue placeholder="Select the matching policy..." /></SelectTrigger>
+                <SelectContent>
                 {shuffledTerms.map((term, tIdx) => (
-                  <option key={tIdx} value={term}>{term}</option>
+                  <SelectItem key={tIdx} value={term}>{term}</SelectItem>
                 ))}
-              </select>
+                </SelectContent>
+              </Select>
             </div>
           ))}
         </div>
@@ -157,9 +143,10 @@ const Quiz = ({ questions, onFinish }) => {
                 {part.options.map((opt, oIdx) => {
                   const isSelected = currentAnswer?.[part.label] === opt;
                   return (
-                    <button
+                    <Button
                       key={oIdx}
-                      className={`option-btn ${isSelected ? 'selected' : ''}`}
+                      variant="outline"
+                      className={`option-btn h-auto w-full whitespace-normal ${isSelected ? 'selected' : ''}`}
                       onClick={() => handleMatchSelect(part.label, opt)}
                       style={{ 
                         background: '#ffffff',
@@ -189,7 +176,7 @@ const Quiz = ({ questions, onFinish }) => {
                         )}
                       </div>
                       <span style={{ fontSize: '1rem' }}>{opt}</span>
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -202,9 +189,10 @@ const Quiz = ({ questions, onFinish }) => {
           {shuffledOptions.map((opt, idx) => {
             const isSelected = Array.isArray(currentAnswer) && currentAnswer.includes(opt);
             return (
-              <button
+              <Button
                 key={idx}
-                className={`option-btn ${isSelected ? 'selected' : ''}`}
+                variant="outline"
+                className={`option-btn h-auto w-full whitespace-normal ${isSelected ? 'selected' : ''}`}
                 onClick={() => handleMultipleSelect(opt)}
               >
                 <div style={{ 
@@ -224,16 +212,17 @@ const Quiz = ({ questions, onFinish }) => {
                   )}
                 </div>
                 <span style={{ textAlign: 'left' }}>{opt}</span>
-              </button>
+              </Button>
             );
           })}
         </div>
       ) : (
         <div className="options-grid">
           {shuffledOptions.map((opt, idx) => (
-            <button
+            <Button
               key={idx}
-              className={`option-btn ${currentAnswer === opt ? 'selected' : ''}`}
+              variant="outline"
+              className={`option-btn h-auto w-full whitespace-normal ${currentAnswer === opt ? 'selected' : ''}`}
               onClick={() => setCurrentAnswer(opt)}
             >
               <div style={{ 
@@ -252,20 +241,25 @@ const Quiz = ({ questions, onFinish }) => {
                 )}
               </div>
               <span style={{ textAlign: 'left' }}>{opt}</span>
-            </button>
+            </Button>
           ))}
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '2rem' }}>
-        <button 
-          className="btn" 
-          style={{ width: 'auto' }} 
-          onClick={handleNext}
-          disabled={!isAnswerComplete}
-        >
-          {isLastQuestion ? 'Submit Questionnaire' : 'Next Question'}
-        </button>
+      <div className="quiz-actions">
+        <p style={{ margin: 0, fontSize: '0.875rem' }}>
+          Mark as done ends the quiz. All unanswered or incomplete questions count as incorrect.
+        </p>
+        <div className="flex shrink-0 flex-col-reverse gap-2 sm:flex-row">
+          <Button variant="outline" onClick={handleMarkAsDone} className="h-auto whitespace-normal">
+            Mark as done
+          </Button>
+          {!isLastQuestion && (
+            <Button onClick={handleNext} className="h-auto whitespace-normal">
+              Next Question
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );

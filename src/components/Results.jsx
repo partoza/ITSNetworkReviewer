@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import Leaderboard from './Leaderboard';
+import { Button } from './ui/button';
 
-const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart, userName }) => {
+const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart, userName, subject }) => {
   const [showReview, setShowReview] = useState(false);
+  const [scoreStatus, setScoreStatus] = useState('saving');
+  const [scoreMessage, setScoreMessage] = useState('');
 
   useEffect(() => {
-    // Post score to the local backend
-    if (userName) {
+    const controller = new AbortController();
+
+    if (userName && subject) {
+      setScoreStatus('saving');
       fetch('/api/leaderboard', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: userName, score })
-      }).catch(err => console.error('Failed to post score', err));
+        body: JSON.stringify({ name: userName, score, subject: subject.id }),
+        signal: controller.signal,
+      })
+        .then(async (response) => {
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(data.error || 'Score could not be saved.');
+          setScoreStatus('saved');
+          setScoreMessage(`Personal best: ${data.personalBest}/${total}`);
+        })
+        .catch((error) => {
+          if (error.name === 'AbortError') return;
+          console.error('Failed to post score', error);
+          setScoreStatus('error');
+          setScoreMessage(error.message);
+        });
     }
-  }, [userName, score]);
+
+    return () => controller.abort();
+  }, [userName, score, subject, total]);
 
   const percentage = Math.round((score / total) * 100);
 
@@ -22,7 +42,8 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
       {!showReview ? (
         <div style={{ textAlign: 'center' }}>
           <h1 style={{ marginBottom: '0.5rem' }}>Questionnaire Complete!</h1>
-          <p style={{ marginBottom: '3rem' }}>Network Security Module</p>
+          <p style={{ marginBottom: '3rem' }}>{subject?.name} Module</p>
+          {scoreMessage && <p className={scoreStatus === 'error' ? 'text-sm text-red-600' : 'text-sm text-emerald-700'} role="status">{scoreMessage}</p>}
 
           <div style={{ 
             width: '200px', 
@@ -52,29 +73,30 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
           </div>
 
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '3rem', flexWrap: 'wrap' }}>
-            <button className="btn" onClick={() => setShowReview(true)} style={{ width: 'auto', background: 'transparent', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>
+            <Button variant="outline" onClick={() => setShowReview(true)}>
               View Results Review
-            </button>
-            <button className="btn" onClick={onRestart} style={{ width: 'auto', background: 'transparent', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>
+            </Button>
+            <Button variant="outline" onClick={onRestart}>
               Try Again
-            </button>
-            <button className="btn" onClick={onReturnHome} style={{ width: 'auto' }}>
+            </Button>
+            <Button onClick={onReturnHome}>
               Return to Dashboard
-            </button>
+            </Button>
           </div>
 
-          <Leaderboard currentUserName={userName} />
+          <Leaderboard subject={subject} currentUserName={userName} refreshKey={scoreStatus} />
         </div>
       ) : (
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
             <h2>Detailed Review</h2>
-            <button 
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setShowReview(false)} 
-              style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '1rem' }}
             >
               ← Back to Score
-            </button>
+            </Button>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -166,9 +188,9 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
             })}
           </div>
 
-          <button className="btn" onClick={onReturnHome} style={{ marginTop: '2rem' }}>
+          <Button className="mt-8 w-full" onClick={onReturnHome}>
             Return to Dashboard
-          </button>
+          </Button>
         </div>
       )}
     </div>
