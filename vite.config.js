@@ -54,7 +54,7 @@ const leaderboardPlugin = () => ({
     server.middlewares.use((req, res, next) => {
       const requestUrl = new URL(req.url, 'http://localhost');
 
-      if (requestUrl.pathname === '/api/auth/status' && req.method === 'GET') {
+      if (requestUrl.pathname === '/api/auth-status' && req.method === 'GET') {
         sendJson(res, 200, { authenticated: isAuthorized(req) });
         return;
       }

@@ -32,7 +32,7 @@ function App() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch('/api/auth/status', { cache: 'no-store', credentials: 'same-origin', signal: controller.signal })
+    fetch('/api/auth-status', { cache: 'no-store', credentials: 'same-origin', signal: controller.signal })
       .then((response) => response.ok ? response.json() : { authenticated: false })
       .then((data) => setAuthStatus(data.authenticated ? 'authenticated' : 'unauthenticated'))
       .catch((error) => {
