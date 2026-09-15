@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Login from './components/Login';
+import React, { useState } from 'react';
 import Dashboard from './components/Dashboard';
 import Quiz from './components/Quiz';
 import Results from './components/Results';
@@ -20,7 +19,6 @@ const readSavedPlayerName = () => {
 };
 
 function App() {
-  const [authStatus, setAuthStatus] = useState('checking');
   const [userName, setUserName] = useState(readSavedPlayerName);
   const [currentView, setCurrentView] = useState('home'); // home, subject, quiz, results, leaderboard
   const [selectedSubjectId, setSelectedSubjectId] = useState(null);
@@ -29,29 +27,6 @@ function App() {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
 
   const selectedSubject = getSubject(selectedSubjectId);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch('/api/auth-status', { cache: 'no-store', credentials: 'same-origin', signal: controller.signal })
-      .then((response) => response.ok ? response.json() : { authenticated: false })
-      .then((data) => setAuthStatus(data.authenticated ? 'authenticated' : 'unauthenticated'))
-      .catch((error) => {
-        if (error.name !== 'AbortError') setAuthStatus('unauthenticated');
-      });
-    return () => controller.abort();
-  }, []);
-
-  const handleLogin = async (passcode) => {
-    const response = await fetch('/api/auth', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'same-origin',
-      body: JSON.stringify({ passcode }),
-    });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.error || 'Authentication failed.');
-    setAuthStatus('authenticated');
-  };
 
   const handleSelectSubject = (subjectId) => {
     setSelectedSubjectId(subjectId);
@@ -115,27 +90,17 @@ function App() {
 
   return (
     <div className="app-container">
-      {authStatus === 'checking' && (
-        <div className="glass-card w-full max-w-md text-center" role="status">
-          <p>Checking secure access…</p>
-        </div>
-      )}
-
-      {authStatus === 'unauthenticated' && (
-        <Login onLogin={handleLogin} />
-      )}
-
-      {authStatus === 'authenticated' && !userName && (
+      {!userName && (
         <NameModal onSubmit={handleNameSubmit} />
       )}
 
-      {authStatus === 'authenticated' && userName && currentView === 'home' && (
+      {userName && currentView === 'home' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
           <Dashboard onSelectSubject={handleSelectSubject} userName={userName} />
         </div>
       )}
 
-      {authStatus === 'authenticated' && userName && selectedSubject && currentView === 'subject' && (
+      {userName && selectedSubject && currentView === 'subject' && (
         <SubjectWelcome
           subject={selectedSubject}
           onStart={handleStartQuiz}
@@ -144,17 +109,17 @@ function App() {
         />
       )}
 
-      {authStatus === 'authenticated' && userName && selectedSubject && currentView === 'leaderboard' && (
+      {userName && selectedSubject && currentView === 'leaderboard' && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Leaderboard subject={selectedSubject} currentUserName={userName} onBack={() => setCurrentView('subject')} />
         </div>
       )}
 
-      {authStatus === 'authenticated' && userName && currentView === 'quiz' && (
+      {userName && currentView === 'quiz' && (
         <Quiz questions={shuffledQuestions} onFinish={handleFinishQuiz} subject={selectedSubject} />
       )}
 
-      {authStatus === 'authenticated' && userName && currentView === 'results' && (
+      {userName && currentView === 'results' && (
         <Results 
           score={score} 
           total={shuffledQuestions.length} 
