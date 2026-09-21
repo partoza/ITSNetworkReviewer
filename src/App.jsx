@@ -25,20 +25,34 @@ function App() {
   const [userAnswers, setUserAnswers] = useState({});
   const [score, setScore] = useState(0);
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
+  const [quizQuestionCount, setQuizQuestionCount] = useState(null);
 
   const selectedSubject = getSubject(selectedSubjectId);
 
   const handleSelectSubject = (subjectId) => {
     setSelectedSubjectId(subjectId);
+    setQuizQuestionCount(null);
     setCurrentView('subject');
   };
 
-  const handleStartQuiz = () => {
+  const handleStartQuiz = (requestedCount) => {
     if (!selectedSubject) return;
+
+    const totalQuestions = selectedSubject.questions.length;
+    const numericCount = Number(requestedCount);
+    const questionCount = Number.isInteger(numericCount)
+      ? Math.min(Math.max(numericCount, 1), totalQuestions)
+      : totalQuestions;
+
     setUserAnswers({});
     setScore(0);
-    setShuffledQuestions(shuffleArray(selectedSubject.questions));
+    setQuizQuestionCount(questionCount);
+    setShuffledQuestions(shuffleArray(selectedSubject.questions).slice(0, questionCount));
     setCurrentView('quiz');
+  };
+
+  const handleRestartQuiz = () => {
+    handleStartQuiz(quizQuestionCount);
   };
 
   const handleFinishQuiz = (finalAnswers) => {
@@ -126,7 +140,7 @@ function App() {
           userAnswers={userAnswers} 
           questions={shuffledQuestions}
           onReturnHome={handleReturnHome}
-          onRestart={handleStartQuiz}
+          onRestart={handleRestartQuiz}
           userName={userName}
           subject={selectedSubject}
         />

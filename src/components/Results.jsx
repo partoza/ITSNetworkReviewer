@@ -31,14 +31,14 @@ const Results = ({ score, total, userAnswers, questions, onReturnHome, onRestart
       fetch('/api/leaderboard', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: userName, score, subject: subject.id }),
+        body: JSON.stringify({ name: userName, score, total, subject: subject.id }),
         signal: controller.signal,
       })
         .then(async (response) => {
           const data = await response.json().catch(() => ({}));
           if (!response.ok) throw new Error(data.error || 'Score could not be saved.');
           setScoreStatus('saved');
-          setScoreMessage(`Personal best: ${data.personalBest}/${total}`);
+          setScoreMessage(`Personal best: ${data.personalBest}/${data.personalBestTotal || total}`);
         })
         .catch((error) => {
           if (error.name === 'AbortError') return;

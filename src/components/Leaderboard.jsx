@@ -39,7 +39,7 @@ const RankMedal = ({ rank }) => {
   );
 };
 
-const normalizeScores = (scores) => {
+const normalizeScores = (scores, fallbackTotal) => {
   if (!Array.isArray(scores)) return [];
 
   return scores
@@ -47,20 +47,21 @@ const normalizeScores = (scores) => {
     .map((entry) => ({
       name: entry.name,
       score: Number(entry.score),
+      total: Number(entry.total) > 0 ? Number(entry.total) : fallbackTotal,
       date: entry.date || new Date(0).toISOString(),
     }))
-    .sort((a, b) => b.score - a.score || new Date(b.date) - new Date(a.date));
+    .sort((a, b) => (b.score / b.total) - (a.score / a.total) || b.score - a.score || new Date(b.date) - new Date(a.date));
 };
 
 const fingerprintScores = (scores) => JSON.stringify(
-  scores.map(({ name, score, date }) => [name, score, date]),
+  scores.map(({ name, score, total, date }) => [name, score, total, date]),
 );
 
-const readSavedReviewer = (cacheKey) => {
+const readSavedReviewer = (cacheKey, fallbackTotal) => {
   try {
     const saved = JSON.parse(localStorage.getItem(cacheKey));
     if (saved?.content?.subjects && Array.isArray(saved?.leaderboard?.scores)) {
-      const scores = normalizeScores(saved.leaderboard.scores);
+      const scores = normalizeScores(saved.leaderboard.scores, fallbackTotal);
       return {
         ...saved,
         leaderboard: {
@@ -73,7 +74,7 @@ const readSavedReviewer = (cacheKey) => {
     const legacy = JSON.parse(localStorage.getItem(LEGACY_CACHE_KEY));
     if (!legacy || !Array.isArray(legacy.scores)) return null;
 
-    const scores = normalizeScores(legacy.scores);
+    const scores = normalizeScores(legacy.scores, fallbackTotal);
     return {
       content: null,
       contentFingerprint: null,
@@ -87,8 +88,9 @@ const readSavedReviewer = (cacheKey) => {
 
 const Leaderboard = ({ subject, currentUserName, onBack, refreshKey }) => {
   const cacheKey = `${CACHE_KEY_PREFIX}:${subject?.id || 'all'}`;
-  const [savedCopy, setSavedCopy] = useState(() => readSavedReviewer(cacheKey));
-  const [scores, setScores] = useState(() => readSavedReviewer(cacheKey)?.leaderboard?.scores || []);
+  const subjectTotal = subject?.questions.length || 1;
+  const [savedCopy, setSavedCopy] = useState(() => readSavedReviewer(cacheKey, subjectTotal));
+  const [scores, setScores] = useState(() => readSavedReviewer(cacheKey, subjectTotal)?.leaderboard?.scores || []);
   const [networkScores, setNetworkScores] = useState(null);
   const [loading, setLoading] = useState(true);
   const [connectionState, setConnectionState] = useState('connecting');
@@ -103,7 +105,7 @@ const Leaderboard = ({ subject, currentUserName, onBack, refreshKey }) => {
       if (!response.ok) throw new Error(`Leaderboard request failed (${response.status})`);
 
       const data = await response.json();
-      const latestScores = normalizeScores(data.scores);
+      const latestScores = normalizeScores(data.scores, subjectTotal);
       setScores(latestScores);
       setNetworkScores(latestScores);
       setConnectionState('online');
@@ -115,7 +117,7 @@ const Leaderboard = ({ subject, currentUserName, onBack, refreshKey }) => {
     } finally {
       if (!silent) setLoading(false);
     }
-  }, [savedCopy, subject]);
+  }, [savedCopy, subject, subjectTotal]);
 
   useEffect(() => {
     fetchScores();
@@ -126,14 +128,14 @@ const Leaderboard = ({ subject, currentUserName, onBack, refreshKey }) => {
   useEffect(() => {
     const syncSavedCopy = (event) => {
       if (event.key !== cacheKey) return;
-      const saved = readSavedReviewer(cacheKey);
+      const saved = readSavedReviewer(cacheKey, subjectTotal);
       setSavedCopy(saved);
       if (connectionState === 'offline' && saved) setScores(saved.leaderboard.scores);
     };
 
     window.addEventListener('storage', syncSavedCopy);
     return () => window.removeEventListener('storage', syncSavedCopy);
-  }, [cacheKey, connectionState]);
+  }, [cacheKey, connectionState, subjectTotal]);
 
   const networkFingerprint = useMemo(
     () => networkScores ? fingerprintScores(networkScores) : null,
@@ -235,7 +237,7 @@ const Leaderboard = ({ subject, currentUserName, onBack, refreshKey }) => {
                     </span>
                   </div>
                 </div>
-                <div className="leaderboard-score" aria-label={`${entry.score} out of ${subject?.questions.length}`}>{entry.score}<span className="text-sm font-normal text-neutral-400">/{subject?.questions.length}</span></div>
+                <div className="leaderboard-score" aria-label={`${entry.score} out of ${entry.total}`}>{entry.score}<span className="text-sm font-normal text-neutral-400">/{entry.total}</span></div>
               </div>
             );
           })}
