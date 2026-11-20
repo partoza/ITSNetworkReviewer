@@ -1,5 +1,6 @@
 import { questions } from './questions';
 import { cyberSecurityQuestions } from './cyber_security';
+import { networkingQuestions } from './networking';
 
 export const subjects = [
   {
@@ -13,6 +14,12 @@ export const subjects = [
     name: 'Cybersecurity',
     description: 'Practice core cybersecurity concepts, risk awareness, incident response, and protecting digital systems.',
     questions: cyberSecurityQuestions,
+  },
+  {
+    id: 'networking',
+    name: 'Networking',
+    description: 'Master networking fundamentals, IP addressing, APIPA, DHCP, routing, switches, topologies, and network diagnostics.',
+    questions: networkingQuestions,
   },
 ];
 

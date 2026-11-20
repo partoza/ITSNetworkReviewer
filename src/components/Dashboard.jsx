@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, Send, UserPlus } from 'lucide-react';
 import shieldImage from '../assets/image.png';
 import cybersecImage from '../assets/cybersec.png';
+import networkingImage from '../assets/networking.jpg';
 import { subjects } from '../data/subjects';
 import OfflineMode from './OfflineMode';
 import { Button } from './ui/button';
@@ -12,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 const subjectImages = {
   'network-security': shieldImage,
   cybersecurity: cybersecImage,
+  networking: networkingImage,
 };
 
 const isValidInviteUrl = (value) => {
@@ -139,7 +141,7 @@ const Dashboard = ({ onSelectSubject, userName }) => (
         <CardDescription className="max-w-xl">Open a module to see its details, start answering, or view its separate leaderboard.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {subjects.map((subject) => (
             <Button key={subject.id} variant="outline" className="group h-auto w-full flex-col items-stretch overflow-hidden p-0 text-left whitespace-normal" onClick={() => onSelectSubject(subject.id)}>
               <img src={subjectImages[subject.id]} alt="" className="aspect-[16/9] w-full object-cover" />

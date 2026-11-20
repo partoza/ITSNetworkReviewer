@@ -5,8 +5,8 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-const ALLOWED_SUBJECTS = new Set(['network-security', 'cybersecurity']);
-const SUBJECT_QUESTION_COUNTS = { 'network-security': 40, cybersecurity: 255 };
+const ALLOWED_SUBJECTS = new Set(['network-security', 'cybersecurity', 'networking']);
+const SUBJECT_QUESTION_COUNTS = { 'network-security': 40, cybersecurity: 255, networking: 50 };
 const PLAYER_NAME_PATTERN = /^[\p{L}\p{N}][\p{L}\p{N} ._'’-]*$/u;
 
 const compareScores = (a, b) => (
