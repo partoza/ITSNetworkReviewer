@@ -17,7 +17,7 @@ export const subjects = [
   },
   {
     id: 'networking',
-    name: 'Networking',
+    name: 'Qualifying Test',
     description: 'Master networking fundamentals, IP addressing, APIPA, DHCP, routing, switches, topologies, and network diagnostics.',
     questions: networkingQuestions,
   },
